@@ -33,7 +33,7 @@
                 <a href="https://github.com/omar1mosa" target="_blank"><i class='bx bxl-github'></i></a>
                 <a href="https://twitter.com/mrmwsy217472845"><i class='bx bxl-twitter' ></i></a>
             </div>
-            <a href="#" class="btn" download="omar_mosa.pdf">Download CV</a>
+            <a href="#" id="downloadLink" class="btn">Download CV</a>
         </div>
         <div class="home-img">
             <img src="./images/landing-image.png" alt="">
@@ -180,5 +180,27 @@
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="./JS/script.js"></script>
+    <script>
+        document.getElementById("downloadLink").addEventListener("click", function() {
+            var filename = "omar_mosa.pdf"; // اسم الملف الذي تريد تحميله
+            var url =  filename; // المسار إلى الملف
+            
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.responseType = 'blob';
+            
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    var blob = new Blob([xhr.response], { type: 'application/pdf' });
+                    var link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(blob);
+                    link.download = filename;
+                    link.click();
+                }
+            };
+            
+            xhr.send();
+        });
+        </script>
 </body>
 </html>
